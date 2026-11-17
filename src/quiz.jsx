@@ -1,6 +1,6 @@
-
 import { useState, useEffect } from "react";
 import "./quiz.css";
+import Result from "./result.jsx";
 
 function Quiz() {
 
@@ -142,29 +142,13 @@ function Quiz() {
     }
 
     if (showResult) {
-        const incorrectAnswers = questions.length - score;
-        const percentage = (score / questions.length) * 100;
-
         return (
-            <div className="quiz-container">
-
-                <h1>QUIZ RESULT</h1>
-
-                <h2>Your Score: {score} / {questions.length}</h2>
-
-                <p>Total Questions: {questions.length}</p>
-
-                <p>Correct Answers: {score}</p>
-
-                <p>Incorrect Answers: {incorrectAnswers}</p>
-
-                <p>Percentage: {percentage}%</p>
-
-                <button onClick={restartQuiz}>
-                    Restart Quiz
-                </button>
-
-            </div>
+            <Result
+                questions={questions}
+                answers={answers}
+                score={score}
+                onRestart={restartQuiz}
+            />
         );
     }
 
@@ -200,31 +184,26 @@ function Quiz() {
                 </button>
             ))}
 
-            
-<div className="navigation">
+            <div className="navigation">
 
-    <button
-        onClick={previousQuestion}
-        disabled={currentQuestion === 0}
-    >
-        Previous
-    </button>
+                <button
+                    onClick={previousQuestion}
+                    disabled={currentQuestion === 0}
+                >
+                    Previous
+                </button>
 
-    {currentQuestion === questions.length - 1 ? (
-        <button
-            onClick={calculateScore}
-           disabled={currentQuestion === 0}
-        >
-            Submit Quiz
-        </button>
-    ) : (
-        <button onClick={nextQuestion}>
-            Next
-        </button>
-    )}
+                {currentQuestion === questions.length - 1 ? (
+                    <button onClick={calculateScore}>
+                        Submit Quiz
+                    </button>
+                ) : (
+                    <button onClick={nextQuestion}>
+                        Next
+                    </button>
+                )}
 
-</div>
-
+            </div>
 
         </div>
     );

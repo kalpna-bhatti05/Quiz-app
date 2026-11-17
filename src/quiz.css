@@ -122,10 +122,6 @@ body {
     font-weight: bold;
 }
 
-.quiz-container > button:hover {
-    background: #1d4ed8;
-}
-
 .navigation {
     display: flex;
     justify-content: space-between;
